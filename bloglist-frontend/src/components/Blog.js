@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import blogService from '../services/blogs'
 
-const Blog = ({blog}) => {
+const Blog = ({ blog }) => {
 
 	const [visible, setVisible] = useState(false)
+	const [likes, setLikes] = useState(blog.likes)
+
 
 	const hideWhenVisible = {
 		paddingTop: 10,
@@ -26,6 +29,16 @@ const Blog = ({blog}) => {
 		setVisible(!visible)
 	}
 
+	const handleLiking = async (blogObj) => {
+		try {
+			console.log(`counting likes ${likes}`)
+			setLikes(blogObj.likes + 1)
+		  await blogService.like(blogObj)
+		} catch(exeption) {
+			console.log('cannot like the blog for some reason')
+		}
+	}
+
 	return (
   <div>
     <div style={hideWhenVisible}>
@@ -35,7 +48,10 @@ const Blog = ({blog}) => {
 		<div style={showWhenVisible}>
 			<p>{blog.title} <button onClick={toggleVisibility}>hide</button></p>
 			<p>{blog.url}</p>
-			<p>Likes {blog.likes}</p>
+			<div>
+				<p>Likes: {likes}</p>
+			<button onClick={() => handleLiking(blog)}>like</button>
+			</div>
 			<p>{blog.author}</p>
 		</div>
   </div>  
