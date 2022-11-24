@@ -31,12 +31,19 @@ const Blog = ({ blog }) => {
 
 	const handleLiking = async (blogObj) => {
 		try {
+			setLikes(likes + 1)
 			console.log(`counting likes ${likes}`)
-			setLikes(blogObj.likes + 1)
-		  await blogService.like(blogObj)
+			const newBlog = {
+				...blogObj,
+				user: blogObj.user.id,
+				likes: likes + 1,
+			}
+
+		  await blogService.like(newBlog)
 		} catch(exeption) {
 			console.log('cannot like the blog for some reason')
 		}
+		return
 	}
 
 	return (
