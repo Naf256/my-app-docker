@@ -53,6 +53,20 @@ const App = () => {
 		}
 	}
 
+	const handleDeleting = async (blog) => {
+		if (window.confirm(`Remove blog ${blog.title}`)) {
+			try {
+				await blogService.deleteBlog(blog.id)
+				const newBlogs = blogs.filter(b => b.id !== blog.id)
+				setBlogs(newBlogs)
+				console.log('successfully deleted the blog')
+			} catch(exeption) {
+				console.log('couldnot delete the blog')
+			}
+		}
+		return 
+	}
+
 	const loginform = () => {
 		return (
 			<div>
@@ -117,6 +131,7 @@ const App = () => {
 					<Blog 
 						key={blog.id}
 						blog={blog} 
+						handleDeleting={handleDeleting}
 					/>
 				)}
 			</div>

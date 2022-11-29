@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, handleDeleting }) => {
 
 	const [visible, setVisible] = useState(false)
 	const [likes, setLikes] = useState(blog.likes)
@@ -46,6 +46,7 @@ const Blog = ({ blog }) => {
 		return
 	}
 
+
 	return (
   <div>
     <div style={hideWhenVisible}>
@@ -60,6 +61,12 @@ const Blog = ({ blog }) => {
 			<button onClick={() => handleLiking(blog)}>like</button>
 			</div>
 			<p>{blog.author}</p>
+			<div>
+				<button onClick={() => handleDeleting(blog)} 
+					style={{backgroundColor: "lightblue"}}>
+				DELETE
+				</button>
+			</div>
 		</div>
   </div>  
 )
