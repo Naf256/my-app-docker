@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import Blog from './components/Blog'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
+import LoginForm from './components/LoginForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -28,6 +30,14 @@ const App = () => {
 			setUser(user)
 		}
 	}, [])
+
+	const handleUsernameChange = (name) => {
+		setUsername(name)
+	}
+
+	const handlePasswordChange = (pass) => {
+		setPassword(pass)
+	}
 
 	const handleLogin = async (e) => {
 		e.preventDefault()
@@ -67,31 +77,6 @@ const App = () => {
 		return 
 	}
 
-	const loginform = () => {
-		return (
-			<div>
-				<h2>Login to application</h2>
-				<form onSubmit={handleLogin}>
-					username
-					<input 
-						value={username} 
-						type="text"
-						name="Username"
-						onChange={({ target }) => setUsername(target.value)} 
-					/>
-
-					password 
-					<input 
-						value={password} 
-						name="Password"
-						type="password"
-						onChange={({ target }) => setPassword(target.value)} 
-					/>
-					<button type="submit">login</button>
-				</form>
-			</div>
-		)
-	}
 
 	const handleLogout = () => {
 		window.localStorage.clear()
@@ -143,7 +128,13 @@ const App = () => {
 			<Notification message={errorMessage} />
 
 		  {user === null
-			? loginform()
+			? <LoginForm 
+					username={username}
+					password={password}
+					handleLogin={handleLogin}
+					handleUsernameChange={handleUsernameChange}
+					handlePasswordChange={handlePasswordChange}
+				/>
 			: blogform()}
 
     </div>
