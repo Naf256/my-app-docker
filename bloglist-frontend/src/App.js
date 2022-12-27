@@ -39,6 +39,10 @@ const App = () => {
     setPassword(pass)
   }
 
+  const handleLiking = (blog, callback) => {
+    callback(blog)
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
@@ -76,7 +80,6 @@ const App = () => {
     }
     return
   }
-
 
   const handleLogout = () => {
     window.localStorage.clear()
@@ -117,12 +120,14 @@ const App = () => {
               key={blog.id}
               blog={blog}
               handleDeleting={handleDeleting}
+              handleLiking={handleLiking}
             />
           )
         }
       </div>
     )
   }
+
 
   return (
     <div>

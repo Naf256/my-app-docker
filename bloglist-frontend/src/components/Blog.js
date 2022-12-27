@@ -3,7 +3,7 @@ import React from 'react'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-const Blog = ({ blog, handleDeleting }) => {
+const Blog = ({ blog, handleDeleting, handleLiking }) => {
 
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
@@ -31,7 +31,7 @@ const Blog = ({ blog, handleDeleting }) => {
     setVisible(!visible)
   }
 
-  const handleLiking = async (blogObj) => {
+  const doLiking = async (blogObj) => {
     try {
       setLikes(likes + 1)
       console.log(`counting likes ${likes}`)
@@ -53,14 +53,14 @@ const Blog = ({ blog, handleDeleting }) => {
     <div>
       <div style={hideWhenVisible}>
         {blog.title} {blog.author}
-        <button onClick={toggleVisibility}>show</button>
+        <button onClick={toggleVisibility} className="show">show</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className="hiding">
         <p>{blog.title} <button onClick={toggleVisibility}>hide</button></p>
         <p>{blog.url}</p>
         <div>
           <p>Likes: {likes}</p>
-          <button onClick={() => handleLiking(blog)}>like</button>
+          <button onClick={() => handleLiking(blog, doLiking)}>like</button>
         </div>
         <p>{blog.author}</p>
         <div>
