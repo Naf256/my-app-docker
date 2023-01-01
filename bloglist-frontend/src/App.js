@@ -105,7 +105,7 @@ const App = () => {
   const blogform = () => {
     blogs.sort(compareBlogs)
     return (
-      <div>
+      <div id="main">
         <h2>blogs</h2>
         <Notification message={notify} />
         <h3>{user.name} is watching
