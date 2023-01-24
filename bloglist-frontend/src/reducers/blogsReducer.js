@@ -45,7 +45,6 @@ export const createBlog = (obj) => {
 export const likeBlog = (obj) => {
   return async dispatch => {
     dispatch(liking(obj))
-    console.log(obj)
     await blogService.like({ ...obj, likes: obj.likes + 1 })
   }
 }
