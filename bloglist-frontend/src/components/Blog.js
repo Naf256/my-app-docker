@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import React from 'react'
-import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
+import { likeBlog } from '../reducers/blogsReducer'
 
 const Blog = ({ blog, handleDeleting, handleLiking }) => {
 
   const [visible, setVisible] = useState(false)
-  const [likes, setLikes] = useState(blog.likes)
-
 
   const hideWhenVisible = {
     paddingTop: 10,
@@ -31,23 +29,6 @@ const Blog = ({ blog, handleDeleting, handleLiking }) => {
     setVisible(!visible)
   }
 
-  const doLiking = async (blogObj) => {
-    try {
-      setLikes(likes + 1)
-      console.log(`counting likes ${likes}`)
-      const newBlog = {
-        ...blogObj,
-        user: blogObj.user.id,
-        likes: likes + 1,
-      }
-
-      await blogService.like(newBlog)
-    } catch(exeption) {
-      console.log('cannot like the blog for some reason')
-    }
-    return
-  }
-
 
   return (
     <div className="blog">
@@ -59,8 +40,8 @@ const Blog = ({ blog, handleDeleting, handleLiking }) => {
         <p>{blog.title} <button onClick={toggleVisibility}>hide</button></p>
         <p>{blog.url}</p>
         <div>
-          <p>Likes: {likes}</p>
-          <button onClick={() => handleLiking(blog, doLiking)}>like</button>
+          <p>Likes: {blog.likes}</p>
+          <button onClick={() => handleLiking(blog, likeBlog)}>like</button>
         </div>
         <p>{blog.author}</p>
         <div>

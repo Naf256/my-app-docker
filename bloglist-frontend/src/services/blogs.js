@@ -22,7 +22,7 @@ const create = async (credentials) => {
 
 const like = async (blog) => {
   const config = {
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }
 
   const response = await axios.put(`${baseUrl}/${blog.id}`, blog, config)

@@ -6,9 +6,7 @@ const middleware = require('../utils/middleware')
 const jwt = require('jsonwebtoken')
 
 blogsRouter.get('/', async (request, response) => {
-	const blogs = await Blog
-		.find({})
-		.populate('user', { username: 1, name: 1 })
+	const blogs = await Blog.find({})
 
 	response.json(blogs)
 })
