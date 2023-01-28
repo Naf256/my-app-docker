@@ -9,6 +9,7 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 const testingRouter = require('./controllers/testing')
+const commentRouter = require('./controllers/comments')
 
 logger.info('connecting to MongoDB', MONGODB_URI)
 
@@ -26,6 +27,7 @@ app.use(middleware.tokenExtractor)
 app.use('/api/users', usersRouter)
 app.use('/api/blogs', middleware.userExtractor, blogsRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/comments', commentRouter)
 
 if (process.env.NODE_ENV == 'test') {
   app.use('/api/testing', testingRouter)

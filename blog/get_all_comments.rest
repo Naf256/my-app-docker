@@ -1,0 +1,29 @@
+GET http://localhost:3003/api/comments
+###
+POST http://localhost:3003/api/comments/63d14d326d5cc96474296d78
+Content-Type: application/json
+
+{
+    "comment": "this is a great blog"
+}
+###
+POST http://localhost:3003/api/comments/63d14d326d5cc96474296d78
+Content-Type: application/json
+
+{
+    "comment": "love the way you lie"
+}
+###
+POST http://localhost:3003/api/comments/63d14d326d5cc96474296d78
+Content-Type: application/json
+
+{
+    "comment": "on the first page of our story"
+}
+###
+POST http://localhost:3003/api/comments/63d14eb26d5cc96474296d8d
+Content-Type: application/json
+
+{
+    "comment": "Humayun ahmed is a magician"
+}
