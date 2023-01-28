@@ -1,16 +1,22 @@
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-//import { likeBlog } from './../reducers/blogsReducer'
+import { useSelector, useDispatch } from 'react-redux'
+import { createComment } from '../reducers/commentsReducer'
+import { useState } from 'react'
 
 const SingleBlog = ({ blogs, handleLiking }) => {
+  const [input, setInput] = useState(null)
+  const dispatch = useDispatch()
   const id = useParams().id
   const blog = blogs.find(b => b.id === id)
-  console.log(blog)
   const comments = useSelector(state =>
     state.comments.filter(c => c.blog === blog.id)
   )
 
-  console.log(comments)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await dispatch(createComment(id, input))
+    setInput('')
+  }
 
   return (
     <div>
@@ -30,6 +36,10 @@ const SingleBlog = ({ blogs, handleLiking }) => {
             </ul> :
             null
         }
+        <form onSubmit={handleSubmit}>
+          <input value={input} onChange={(e) => setInput(e.target.value)} />
+          <button>comment</button>
+        </form>
       </div>
     </div>
   )

@@ -23,9 +23,9 @@ export const initialComments = () => {
   }
 }
 
-export const createComment = (id, message) => {
+export const createComment = (id, credentials) => {
   return async dispatch => {
-    const comment = await commentService.create(id, message)
+    const comment = await commentService.create(id, credentials)
     dispatch(creating(comment))
   }
 }
