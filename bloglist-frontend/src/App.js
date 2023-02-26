@@ -110,8 +110,8 @@ const App = () => {
       {user ?
         <div>
           <p>
-            <Link to='/users'> users  </Link>
-            <Link to='/'>  blogs </Link>
+            <Link to='/users'>users</Link>
+            <Link to='/'>blogs</Link>
             <b>{user.name} is watching</b>
             <button onClick={handleLogout}>logout</button>
           </p>
